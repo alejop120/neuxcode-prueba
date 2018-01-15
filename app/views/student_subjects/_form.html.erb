@@ -1,0 +1,24 @@
+<%= form_for [@student, @student_subject] do |form| %>
+  <% if student_subject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student_subject.errors.count, "error") %> prohibited this student_subject from being saved:</h2>
+
+      <ul>
+      <% student_subject.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :student_id, value: @student.id %>
+
+  <div class="field">
+    <%= form.label :rate, value: "Nota" %>
+    <%= form.text_field :rate, id: :student_subject_rate %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

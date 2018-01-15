@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Estudiantes de <%= @course.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= link_to "Asignaturas", student_student_subjects_path(student) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Estudiante', new_course_student_path(@course) %>

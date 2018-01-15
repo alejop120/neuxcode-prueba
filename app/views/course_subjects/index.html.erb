@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Materias de <%= @course.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Course</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_subjects.each do |course_subject| %>
+      <tr>
+        <td><%= course_subject.subject %></td>
+        <td><%= course_subject.course %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+<%= link_to "Regresar a cursos", courses_path() %>
