@@ -14,7 +14,7 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td><%= link_to 'Asignaturas', new_course_course_subject_path(course.id), remote: true, "data-toggle" => "modal", "data-target" => "#subjectsByCourseModal" %></td>
+        <td><%= link_to 'Asignaturas', new_course_course_subject_path(course.id), remote: true %></td>
         <td><%= link_to 'Estudiantes', course_students_path(course) %></td>
       </tr>
     <% end %>
@@ -24,7 +24,6 @@
 <br>
 
 <%= link_to 'Nuevo Curso', new_course_path %>
-
 
 <div class="modal fade" id="subjectsByCourseModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-md">

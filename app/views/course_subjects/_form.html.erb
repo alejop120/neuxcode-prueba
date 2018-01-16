@@ -11,7 +11,7 @@
             <% @assigned_subjects.each do |assigned_subject| %>
               <div class="col-md-4 ph10 mb5 text-left">
                 <label class="block mt15 option option-primary">
-                  <input type="checkbox" name="destroy_places[]" value="<%= assigned_subject.id %>">
+                  <input type="checkbox" name="destroy_subjects[]" value="<%= assigned_subject.id %>">
                   <span class="checkbox"></span>
                   <%= assigned_subject.name %>
                 </label>
@@ -28,7 +28,7 @@
             <% @subjects_to_assign.each do |subject_to_assign| %>
               <div class="col-md-4 ph10 mb5 text-left">
                 <label class="block mt15 option option-primary">
-                  <input type="checkbox" name="new_places[]" value="<%= subject_to_assign.id %>">
+                  <input type="checkbox" name="new_subjects[]" value="<%= subject_to_assign.id %>">
                   <span class="checkbox"></span>
                   <%= subject_to_assign.name %>
                 </label>

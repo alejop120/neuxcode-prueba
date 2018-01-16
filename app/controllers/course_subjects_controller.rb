@@ -18,7 +18,7 @@ class CourseSubjectsController < ApplicationController
   def new
     @course_subject = CourseSubject.new
     @assigned_subjects = @course.subjects
-    @subjects_to_assign = @course.subjects.where.not(id: @assigned_subjects)
+    @subjects_to_assign = Subject.where.not(id: @assigned_subjects)
   end
 
   # GET /course_subjects/1/edit
@@ -37,6 +37,14 @@ class CourseSubjectsController < ApplicationController
         else
           puts "Error removing course subject: #{destroy_course.errors.full_messages}"
         end
+        @course.students.each do |student|
+          destroy_student_subject = StudentSubject.find_by(student_id: student.id, subject_id: subject_id)
+          if destroy_student_subject.destroy
+            puts "Deleted Student Subject"
+          else
+            puts "Error removing student subject: #{destroy_student_subject.errors.full_messages}"
+          end
+        end
       end
     end
     new_subjects = params[:new_subjects]
@@ -48,10 +56,18 @@ class CourseSubjectsController < ApplicationController
         else
           puts "Error creating course subject: #{new_course_subject.errors.full_messages}"
         end
+        @course.students.each do |student|
+          new_student_subject = StudentSubject.new(student_id: student.id, subject_id: subject_id)
+          if new_student_subject.save
+            puts "Created Course Subject"
+          else
+            puts "Error creating course subject: #{new_student_subject.errors.full_messages}"
+          end
+        end
       end
     end
     respond_to do |format|
-      format.js {  flash[:notice] = "Cursos asignados a #{@subject.name} correctamente" }
+      format.js {  flash[:notice] = "Cursos asignados a #{@course.name} correctamente" }
     end
 
   end

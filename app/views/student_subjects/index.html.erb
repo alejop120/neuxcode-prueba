@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Nombre</th>
       <th>Calificación</th>
       <th colspan="3"></th>
     </tr>
@@ -14,7 +15,7 @@
     <% @student_subjects.each do |student_subject| %>
       <tr>
         <td><%= student_subject.rate %></td>
-        <td><%= link_to "Calificar", edit_student_student_subject(@student, student_subject) %></td>
+        <td><%= link_to "Calificar", edit_student_student_subject_path(@student, student_subject) %></td>
       </tr>
     <% end %>
   </tbody>
