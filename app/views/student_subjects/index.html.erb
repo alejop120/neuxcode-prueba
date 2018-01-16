@@ -14,7 +14,7 @@
   <tbody>
     <% @student_subjects.each do |student_subject| %>
       <tr>
-        <td><%= student_subject.rate %></td>
+        <td><%= number_with_precision(student_subject.rate, precision: 1) %></td>
         <td><%= link_to "Calificar", edit_student_student_subject_path(@student, student_subject) %></td>
       </tr>
     <% end %>

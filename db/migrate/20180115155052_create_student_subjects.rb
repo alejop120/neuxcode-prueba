@@ -3,7 +3,7 @@ class CreateStudentSubjects < ActiveRecord::Migration[5.1]
     create_table :student_subjects do |t|
       t.references :subject
       t.references :student
-      t.decimal :rate
+      t.decimal :rate, precision: 2, scale: 1
 
       t.timestamps
     end

@@ -42,12 +42,18 @@ class StudentSubjectsController < ApplicationController
   # PATCH/PUT /student_subjects/1.json
   def update
     respond_to do |format|
-      if @student_subject.update(student_subject_params)
-        format.html { redirect_to student_student_subjects_path(@student), notice: 'Nota actualizada.' }
-        format.json { render :show, status: :ok, location: @student_subject }
+      t = Time.now
+      limit_rate = t.strftime('%M').to_f + 10
+      unless student_subject_params["rate"].to_f > limit_rate
+        if @student_subject.update(student_subject_params)
+          format.html { redirect_to student_student_subjects_path(@student), notice: 'Nota actualizada.' }
+          format.json { render :show, status: :ok, location: @student_subject }
+        else
+          format.html { render :edit }
+          format.json { render json: @student_subject.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @student_subject.errors, status: :unprocessable_entity }
+        format.html { render :edit, error: "Nota no puede ser mayor a #{limit_rate}" }
       end
     end
   end
